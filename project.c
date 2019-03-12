@@ -7,7 +7,6 @@
 
 void printBoard(char **);
 char **allocateMem(char **);
-//void onePlayer(char **);
 void twoPlayers(char **);
 //void vsComputer(char **);
 char **zeroOut(char **);
