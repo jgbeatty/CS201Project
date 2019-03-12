@@ -1,2 +1,2 @@
 all:
-	gcc project.c -o jb
+	gcc main.c -o jb

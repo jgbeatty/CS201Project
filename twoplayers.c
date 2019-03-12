@@ -1,56 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "win.c"
-// #define row 6
-// #define column 7
 
 void printBoard(char **);
 char **allocateMem(char **);
-void twoPlayers(char **);
-//void vsComputer(char **);
 char **zeroOut(char **);
 int checkWin(char **, int, char);
 void placeMark(int , char, char **);
-
-int main() {
-  char answer;
-  printf("Press: s - for single player, t - for two players, or c - for playing agains the computer: " );
-  scanf("%c", &answer);
-
-  while ( (answer != 's') && (answer != 't') && (answer != 'c') ) {
-    printf("Error: ");
-    scanf(" %c", &answer);
-  }
-
-  char **board;
-  board = allocateMem(board);
-  board = zeroOut(board);
-
-  switch(answer) {
-    case 's' :
-      //onePlayer(board);
-      break;
-    case 't' :
-      twoPlayers(board);
-      break;
-    case 'c' :
-      //vsComputer(board);
-      break;
-  }
-  printf("Whould you like to play again? y/n : ");
-  scanf("%c", &answer);
-  while ( (answer != 'y') || (answer != 'n') ){
-    printf("Error: please enter \"y\" / \"n\" " );
-    scanf("%c", &answer);
-  }
-  while ( answer == 'y') {
-
-  }
-
-  printf("Thank you for playing!\n");
-  return 0;
-}
 
 char **allocateMem(char **array) {
   array = malloc (sizeof(char *) * 6);
@@ -162,7 +118,3 @@ int checkWin(char **board, int move, char turn) {
 
   return win;
 }
-
-
-
-// Row x Column
