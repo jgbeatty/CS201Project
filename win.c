@@ -2,8 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 
-int Vertical(char **board, int move, char turn) {
-    int check = 5;
+int Vertical(char **board, int move, char turn, int row, int column) {
+    int check = (row-1);
     int four = 0;
     int win = 0;
     if (board[0][move] != ' ') {
@@ -16,7 +16,7 @@ int Vertical(char **board, int move, char turn) {
     }
     if (check != 0)
         check ++;
-    while ( (check <= 5) && (move <=6) && (move >= 0) && (board[check][move] == turn)  ) { 
+    while ( (check <= (row - 1)) && (move <=(column - 1)) && (move >= 0) && (board[check][move] == turn)  ) { 
         four++;
         if (four == 4) {
             win = 1;
@@ -27,8 +27,8 @@ int Vertical(char **board, int move, char turn) {
     return win;
 }
 
-int Horizontal(char **board, int move, char turn) {
-    int check = 5;
+int Horizontal(char **board, int move, char turn, int row, int column) {
+    int check = (row - 1);
     int four = 0;
     int win = 0;
     if (board[0][move] != ' ') {
@@ -44,7 +44,7 @@ int Horizontal(char **board, int move, char turn) {
     while ( ( (move-1) >= 0) && (board[check][move-1] == turn) ) {
         move--;
     }
-    while ( (move < 7) && (board[check][move] == turn) ) {
+    while ( (move < column) && (board[check][move] == turn) ) {
         four++;
         if (four == 4) {
             win = 1;
@@ -55,8 +55,8 @@ int Horizontal(char **board, int move, char turn) {
     return win;
 }
 
-int Backslash (char **board, int move, char turn) {
-    int check = 5;
+int Backslash (char **board, int move, char turn, int row, int column) {
+    int check = (row - 1);
     int four = 0;
     int win = 0;
     if (board[0][move] != ' ') {
@@ -68,11 +68,11 @@ int Backslash (char **board, int move, char turn) {
         }
         check++;
     }
-    while ( (check >= 0) && (move < 7) && (board[(check - 1)][(move + 1)] == turn) ) {
+    while ( (check >= 0) && (move < column) && (board[(check - 1)][(move + 1)] == turn) ) {
         move++;
         check--;
     }
-    while ( (check < 6) && (move >= 0) && (board[check][move] == turn) ) {
+    while ( (check < row) && (move >= 0) && (board[check][move] == turn) ) {
         four++;
         if (four == 4) {
             win = 1;
@@ -84,8 +84,8 @@ int Backslash (char **board, int move, char turn) {
     return win;
 }
 
-int Fowardslash (char **board, int move, char turn) {
-    int check = 5;
+int Fowardslash (char **board, int move, char turn, int row, int column) {
+    int check = (row - 1);
     int four = 0;
     int win = 0;
     if (board[0][move] != ' ') {
@@ -101,7 +101,7 @@ int Fowardslash (char **board, int move, char turn) {
         move--;
         check--;
     }
-    while ( (check < 6) && (move < 7) && (board[check][move] == turn) ) {
+    while ( (check < row) && (move < column) && (board[check][move] == turn) ) {
         four++;
         if (four == 4) {
             win = 1;

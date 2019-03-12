@@ -2,30 +2,30 @@
 #include <string.h>
 #include <stdlib.h>
 
-void printBoard(char **);
-char **allocateMem(char **);
-char **zeroOut(char **);
-int checkWin(char **, int, char);
-void placeMark(int , char, char **);
+void printBoard(char **, int , int);
+char **allocateMem(char **, int , int);
+char **zeroOut(char **, int , int);
+int checkWin(char **, int, char, int , int);
+void placeMark(int , char, char **, int , int);
 
-char **allocateMem(char **array) {
-  array = malloc (sizeof(char *) * 6);
-    for (int i = 0; i < 6; i++)
-        array[i] = malloc (sizeof(char *) * 7);
+char **allocateMem(char **array, int row, int column) {
+  array = malloc (sizeof(char *) * row);
+    for (int i = 0; i < row; i++)
+        array[i] = malloc (sizeof(char *) * column);
     return array;
 }
 
-char **zeroOut(char ** array) {
-  for (int a = 0; a < 6; a++) 
-    for (int b = 0; b < 7; b++)
+char **zeroOut(char ** array, int row, int column) {
+  for (int a = 0; a < row; a++) 
+    for (int b = 0; b < column; b++)
       array[a][b] = ' ';
     
   return array;
 }
 
-void printBoard(char **array) {
-    for (int a = 0; a < 6; a++) {
-        for (int b = 0; b < 7; b++) {
+void printBoard(char **array, int row, int column) {
+    for (int a = 0; a < row; a++) {
+        for (int b = 0; b < column; b++) {
             printf("| %c ", array[a][b]);
         }
         printf("|\n");
@@ -35,9 +35,9 @@ void printBoard(char **array) {
     return;
 }
 
-void twoPlayers(char **board) {
+void twoPlayers(char **board, int row, int column) {
   printf("Welcome to two player\n");
-  printBoard(board);
+  printBoard(board, row, column);
   int win = 0;
   int move = 0;
   char turn = ' ';
@@ -57,10 +57,10 @@ void twoPlayers(char **board) {
     }
     move--;
     turn = 'X';
-    placeMark(move, turn, board);
-    win = checkWin(board, move, turn);
+    placeMark(move, turn, board, row, column);
+    win = checkWin(board, move, turn, row, column);
     printf("\n\n");
-    printBoard(board);
+    printBoard(board, row, column);
     if (win == 1)
       break;
     printf("Player 2, please enter the column you want to use : ");
@@ -77,23 +77,23 @@ void twoPlayers(char **board) {
     }
     move--;
     turn = 'O';
-    placeMark(move, turn, board);
+    placeMark(move, turn, board, row, column);
     printf("\n\n");
-    printBoard(board);
-    win = checkWin(board, move, turn);
+    printBoard(board, row, column);
+    win = checkWin(board, move, turn, row, column);
     if (win == 1)
       break;
   }
   if (turn == 'X') {
-    printf("Congratulations player one, YOU WIN!");
+    printf("Congratulations player one, YOU WIN!\n");
   }
   else 
-    printf("Congratulations player two, YOU WIN!");
+    printf("Congratulations player two, YOU WIN!\n");
   
 }
 
-void placeMark(int move, char turn, char **board) {
-  int check = 5;
+void placeMark(int move, char turn, char **board, int row, int column) {
+  int check = (row - 1);
   while (board[check][move] != ' ') {
     check--;
   }
@@ -102,18 +102,18 @@ void placeMark(int move, char turn, char **board) {
   return;
 }
 
-int checkWin(char **board, int move, char turn) {
+int checkWin(char **board, int move, char turn, int row, int column) {
   int count = 0;
   int win = 0;
-  win = Vertical(board, move, turn);
+  win = Vertical(board, move, turn, row, column);
   if (win != 1) {
-    win = Horizontal(board, move, turn);
+    win = Horizontal(board, move, turn, row, column);
   }
   if (win != 1) {
-    win = Backslash(board, move, turn);
+    win = Backslash(board, move, turn, row, column);
   }
   if (win != 1) {
-    win = Fowardslash(board, move, turn);
+    win = Fowardslash(board, move, turn, row, column);
   }
 
   return win;

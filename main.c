@@ -3,10 +3,9 @@
 #include <stdlib.h>
 #include "win.c"
 #include "twoplayers.c"
-// #define row 6
-// #define column 7
 
-void twoPlayers(char **);
+
+void twoPlayers(char **, int , int);
 //void vsComputer(char **);
 // void printBoard(char **);
 // char **allocateMem(char **);
@@ -15,142 +14,55 @@ void twoPlayers(char **);
 // void placeMark(int , char, char **);
 
 int main() {
-  char answer;
-  printf("Press: t - for two players, or s - for single player against the computer: " );
-  scanf("%c", &answer);
+  int row;
+  int column;
+  char again[10] = "yes";
+  printf("%s\n", again);
+  while ( strcasecmp(again, "yes") == 0 ) {
+    char answer[10];
+    printf("Enter: two - for two players, or one - for single player against the computer: " );
+    scanf("%s", answer);
 
-  while ( (answer != 't') && (answer != 's') ) {
-    printf("Error: ");
-    scanf(" %c", &answer);
-  }
+    while ( (strcasecmp(answer, "two") == 0) && (strcasecmp(answer, "one") == 0) ) {
+      printf("Error! please enter \"one\" or \"two\" : ");
+      scanf(" %s", answer);
+    }
+    int point;
+    if (strcasecmp(answer, "one") == 0) 
+      point = 1;
+    else 
+      point = 2;
 
-  char **board;
-  board = allocateMem(board);
-  board = zeroOut(board);
+    printf("How many rows do you want? Please enter a number greater than 4\t: ");
+    scanf("%d", &row);
 
-  switch(answer) {
-    case 't' :
-      twoPlayers(board);
-      break;
-    case 's' :
-      //vsComputer(board);
-      break;
+    printf("How many rows do you want? Please enter a number greater than 4\t: ");
+    scanf("%d", &column);
+
+    printf("%d\n%d\n%d\n", point, row, column);
+    
+    char **board;
+    board = allocateMem(board, row, column);
+    board = zeroOut(board, row, column);
+
+    switch (point) {
+      case 1:
+        printf("Case 1\n");
+        break;
+      case 2:
+        printf("Case 2\n");
+        twoPlayers(board, row, column);
+        break;
+    }
+
+    
+    printf("Do you want to play again? (yes)/(no) : ");
+    scanf(" %s", again);
   }
 
   printf("Thank you for playing!\n");
   return 0;
 }
-
-/*char **allocateMem(char **array) {
-  array = malloc (sizeof(char *) * 6);
-    for (int i = 0; i < 6; i++)
-        array[i] = malloc (sizeof(char *) * 7);
-    return array;
-}
-
-char **zeroOut(char ** array) {
-  for (int a = 0; a < 6; a++) 
-    for (int b = 0; b < 7; b++)
-      array[a][b] = ' ';
-    
-  return array;
-}
-
-void printBoard(char **array) {
-    for (int a = 0; a < 6; a++) {
-        for (int b = 0; b < 7; b++) {
-            printf("| %c ", array[a][b]);
-        }
-        printf("|\n");
-        printf("-----------------------------\n");
-    }
-    printf("  1   2   3   4   5   6   7\n");
-    return;
-}
-
-void twoPlayers(char **board) {
-  printf("Welcome to two player\n");
-  printBoard(board);
-  int win = 0;
-  int move = 0;
-  char turn = ' ';
-  while (1) {
-    printf("Player 1, please enter the column you want to use : ");
-    scanf(" %d", &move);
-    while ( (move != 1) && (move != 2) && (move != 3) && (move != 4) && (move != 5) && (move != 6) && (move != 7) ){
-      printf("ERROR: Invalid number. Please enter number from 1 to 7 : ");
-      scanf(" %d", &move);
-      printf("\n");
-    }
-    while (board[0][(move-1)] != ' ' ) {
-      printf("ERROR: column is filled, please pick a different one : ");
-      scanf(" %d", &move);
-      printf("\n");
-
-    }
-    move--;
-    turn = 'X';
-    placeMark(move, turn, board);
-    win = checkWin(board, move, turn);
-    printf("\n\n");
-    printBoard(board);
-    if (win == 1)
-      break;
-    printf("Player 2, please enter the column you want to use : ");
-    scanf(" %d", &move);
-    while ( (move != 1) && (move != 2) && (move != 3) && (move != 4) && (move != 5) && (move != 6) && (move != 7) ){
-      printf("ERROR: Invalid number. Please enter number from 1 to 7 : ");
-      scanf(" %d", &move);
-      printf("\n");
-    }
-    while (board[0][(move - 1)] != ' ' ) {
-      printf("ERROR: column is filled, please pick a different one : ");
-      scanf(" %d", &move);
-      printf("\n");
-    }
-    move--;
-    turn = 'O';
-    placeMark(move, turn, board);
-    printf("\n\n");
-    printBoard(board);
-    win = checkWin(board, move, turn);
-    if (win == 1)
-      break;
-  }
-  if (turn == 'X') {
-    printf("Congratulations player one, YOU WIN!");
-  }
-  else 
-    printf("Congratulations player two, YOU WIN!");
-  
-}
-
-void placeMark(int move, char turn, char **board) {
-  int check = 5;
-  while (board[check][move] != ' ') {
-    check--;
-  }
-  board[check][move] = turn;
-
-  return;
-}
-
-int checkWin(char **board, int move, char turn) {
-  int count = 0;
-  int win = 0;
-  win = Vertical(board, move, turn);
-  if (win != 1) {
-    win = Horizontal(board, move, turn);
-  }
-  if (win != 1) {
-    win = Backslash(board, move, turn);
-  }
-  if (win != 1) {
-    win = Fowardslash(board, move, turn);
-  }
-
-  return win;
-} */
 
 
 
