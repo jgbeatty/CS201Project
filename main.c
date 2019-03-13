@@ -33,13 +33,12 @@ int main() {
     else 
       point = 2;
 
-    printf("How many rows do you want? Please enter a number greater than 4\t: ");
+    printf("How many rows do you want? Please enter a number greater than 4  \t: ");
     scanf("%d", &row);
 
-    printf("How many rows do you want? Please enter a number greater than 4\t: ");
+    printf("How many column do you want? Please enter a number greater than 4\t: ");
     scanf("%d", &column);
 
-    printf("%d\n%d\n%d\n", point, row, column);
     
     char **board;
     board = allocateMem(board, row, column);
@@ -47,10 +46,8 @@ int main() {
 
     switch (point) {
       case 1:
-        printf("Case 1\n");
         break;
       case 2:
-        printf("Case 2\n");
         twoPlayers(board, row, column);
         break;
     }

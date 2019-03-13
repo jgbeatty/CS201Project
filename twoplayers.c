@@ -28,10 +28,19 @@ void printBoard(char **array, int row, int column) {
         for (int b = 0; b < column; b++) {
             printf("| %c ", array[a][b]);
         }
-        printf("|\n");
-        printf("-----------------------------\n");
+        printf("|\n-");
+        for (int b = 0; b < column; b++) {
+          printf("----");
+        }
+        printf("\n");
     }
-    printf("  1   2   3   4   5   6   7\n");
+    for (int a = 1; a <= column; a++) {
+      if (a < 10) 
+        printf(" %d  ", a);
+      else
+        printf(" %d ", a);
+    }
+    printf("\n");
     return;
 }
 
@@ -44,8 +53,8 @@ void twoPlayers(char **board, int row, int column) {
   while (1) {
     printf("Player 1, please enter the column you want to use : ");
     scanf(" %d", &move);
-    while ( (move != 1) && (move != 2) && (move != 3) && (move != 4) && (move != 5) && (move != 6) && (move != 7) ){
-      printf("ERROR: Invalid number. Please enter number from 1 to 7 : ");
+    while ( (move > 1 ) && (move >= column) ){
+      printf("ERROR: Invalid number. Please enter number from 1 to %d : ", column);
       scanf(" %d", &move);
       printf("\n");
     }
@@ -65,8 +74,8 @@ void twoPlayers(char **board, int row, int column) {
       break;
     printf("Player 2, please enter the column you want to use : ");
     scanf(" %d", &move);
-    while ( (move != 1) && (move != 2) && (move != 3) && (move != 4) && (move != 5) && (move != 6) && (move != 7) ){
-      printf("ERROR: Invalid number. Please enter number from 1 to 7 : ");
+    while ( (move < 1) && (move >= column) ){
+      printf("ERROR: Invalid number. Please enter number from 1 to %d : ", column);
       scanf(" %d", &move);
       printf("\n");
     }
