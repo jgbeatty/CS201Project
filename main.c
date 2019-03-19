@@ -6,12 +6,8 @@
 
 
 void twoPlayers(char **, int , int);
-//void vsComputer(char **);
-// void printBoard(char **);
-char **allocateMem(char **);
-char **zeroOut(char **);
-// int checkWin(char **, int, char);
-// void placeMark(int , char, char **);
+char **allocateMem(char **, int, int);
+char **zeroOut(char **,int, int);
 
 int main() {
   int row;
@@ -33,10 +29,10 @@ int main() {
     else 
       point = 2;
 
-    printf("\n\nHow many rows do you want? Please enter a number greater than 4  \t: ");
+    printf("\nHow many rows do you want? Please enter a number greater than 4  \t: ");
     scanf("%d", &row);
 
-    printf("\n\nHow many columns do you want? Please enter a number greater than 4\t: ");
+    printf("\nHow many columns do you want? Please enter a number greater than 4\t: ");
     scanf("%d", &column);
 
     
