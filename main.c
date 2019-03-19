@@ -8,8 +8,8 @@
 void twoPlayers(char **, int , int);
 //void vsComputer(char **);
 // void printBoard(char **);
-// char **allocateMem(char **);
-// char **zeroOut(char **);
+char **allocateMem(char **);
+char **zeroOut(char **);
 // int checkWin(char **, int, char);
 // void placeMark(int , char, char **);
 
@@ -33,10 +33,10 @@ int main() {
     else 
       point = 2;
 
-    printf("How many rows do you want? Please enter a number greater than 4  \t: ");
+    printf("\n\nHow many rows do you want? Please enter a number greater than 4  \t: ");
     scanf("%d", &row);
 
-    printf("How many column do you want? Please enter a number greater than 4\t: ");
+    printf("\n\nHow many columns do you want? Please enter a number greater than 4\t: ");
     scanf("%d", &column);
 
     
@@ -59,6 +59,20 @@ int main() {
 
   printf("Thank you for playing!\n");
   return 0;
+}
+char **allocateMem(char **array, int row, int column) {
+  array = malloc (sizeof(char *) * row);
+    for (int i = 0; i < row; i++)
+        array[i] = malloc (sizeof(char *) * column);
+    return array;
+}
+
+char **zeroOut(char ** array, int row, int column) {
+  for (int a = 0; a < row; a++) 
+    for (int b = 0; b < column; b++)
+      array[a][b] = ' ';
+    
+  return array;
 }
 
 

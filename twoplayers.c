@@ -3,25 +3,12 @@
 #include <stdlib.h>
 
 void printBoard(char **, int , int);
-char **allocateMem(char **, int , int);
-char **zeroOut(char **, int , int);
+// char **allocateMem(char **, int , int);
+// char **zeroOut(char **, int , int);
 int checkWin(char **, int, char, int , int);
 void placeMark(int , char, char **, int , int);
 
-char **allocateMem(char **array, int row, int column) {
-  array = malloc (sizeof(char *) * row);
-    for (int i = 0; i < row; i++)
-        array[i] = malloc (sizeof(char *) * column);
-    return array;
-}
 
-char **zeroOut(char ** array, int row, int column) {
-  for (int a = 0; a < row; a++) 
-    for (int b = 0; b < column; b++)
-      array[a][b] = ' ';
-    
-  return array;
-}
 
 void printBoard(char **array, int row, int column) {
     for (int a = 0; a < row; a++) {
