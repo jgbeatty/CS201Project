@@ -34,16 +34,6 @@ int fillCol(char** board, int column) {
   else return 0;
 }
 
-void placeMark(int move, char turn, char **board, int row, int column) {
-  int check = (row - 1);
-  while (board[check][move] != ' ') {
-    check--;
-  }
-  board[check][move] = turn;
-
-  return;
-}
-
 void printBoard(char **array, int row, int column) {
     for (int a = 0; a < row; a++) {
         for (int b = 0; b < column; b++) {
@@ -63,6 +53,21 @@ void printBoard(char **array, int row, int column) {
     }
     printf("\n");
     return;
+  }
+
+void placeMark(int move, char turn, char **board, int row, int column) {
+  int check = 0;
+  if (board[check+1][move] != ' ') {
+    check = 0;
+  }
+  else {
+    while ( (check < row) && (board[check][move] == ' ')  ) {
+      check++;
+    }
+    check--;
+  }
+  board[check][move] = turn;
+  return;
 }
 
 int Vertical(char **board, int move, char turn, int row, int column) {
@@ -228,11 +233,9 @@ int scoreMove(char** board, int row, int column, int movecol, char shape) {
   int score = 0;
   int moverow = 0;
   int temp = 0;
-  printf("HERE\n");
   while (board[moverow][movecol] == ' ') {
     moverow++;
   }
-  printf("NOT HERE\n");
   temp = checkScore(board, row, column, moverow, movecol, shape);
   if (temp == 4) score = 20;
   if (temp == 3) score = 10;
@@ -246,7 +249,6 @@ int scoreMove(char** board, int row, int column, int movecol, char shape) {
 }
 
 int computerMove(char** board, int row, int column) {
-  printf("%d\n\n", column);
   int ratingO[column];
   int ratingX[column];
   destroyArray(ratingO, column);
@@ -255,29 +257,16 @@ int computerMove(char** board, int row, int column) {
     if ( (fillCol(board, i) == 0) ) {
       placeMark(i, 'O', board, row, column);
       ratingO[i] = scoreMove(board, row, column, i, 'O');
-      printf("%d  ", ratingO[i]);
       for (int j = 0; j < column; j++) {
-        if( (fillCol(board, i) == 0) ) {
-          printf("AGAIN  %d\n", j);
+        if( (fillCol(board, j) == 0) ) {
           placeMark(j, 'X', board, row, column);
-          printf("STONE PLACED\n");
-          printBoard(board, row, column);
           ratingX[j] = scoreMove(board, row, column, j, 'X');
-          printf("Removing stone\n");
           removeStone(board, j);
-          printf("Stone remove\n");
-          // printBoard(board, row, column);
         }
-        printf("OUT OF LOOP\n");
-        printf("HERE?!?!\n");
       }
-      printf("%d  ", minArray(ratingX, column));
       ratingO[i] = (ratingO[i] + minArray(ratingX, column) );
-      printf("%d  \n", ratingO[i]);
-      printf("\n");
       destroyArray(ratingX, column);
       removeStone(board, i);
-      printf("End of if\n\n");
     }
   }
 

@@ -37,9 +37,13 @@ void onePlayer(char** board, int row, int column) {
     if (tie) break;
 
     move = computerMove(board, row, column);
+    printf("defintly right here \n");
+    printf("%d\n", move);
     // move--;
     turn = 'O';
+    printf("Fuck\n");
     placeMark(move, turn, board, row, column);
+    printf("Place\n");
     win = checkWin(board, move, turn, row, column);
     printf("\n\n");
     printBoard(board, row, column);
