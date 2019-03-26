@@ -8,7 +8,8 @@
 void onePlayer(char** board, int row, int column) {
   printf("welcome to one player\n");
   printBoard(board, row, column);
-  bool win = false;
+  int win = 0;
+  bool tie = false;
   int move = 0;
   int turn = ' ';
   while (1) {
@@ -31,7 +32,7 @@ void onePlayer(char** board, int row, int column) {
     win = checkWin(board, move, turn, row, column);
     printf("\n\n");
     printBoard(board, row, column);
-    if (win == 1) break;
+    if (win == 4) break;
     tie = boardFilled(board, row, column);
     if (tie) break;
 
@@ -42,7 +43,16 @@ void onePlayer(char** board, int row, int column) {
     win = checkWin(board, move, turn, row, column);
     printf("\n\n");
     printBoard(board, row, column);
-    if (win == 1) break;
+    if (win == 4) break;
+  }
+  if (tie) {
+    printf("It is a tie. YOU BOTH LOSE\n");
+  }
+  else if (turn == 'X') {
+    printf("Congratulations player one, YOU WIN!\n");
+  }
+  else {
+    printf("THE COMPUTER WON!\n");
   }
 
 }

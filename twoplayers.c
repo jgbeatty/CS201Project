@@ -7,10 +7,10 @@
 void twoPlayers(char **board, int row, int column) {
   printf("Welcome to two player\n");
   printBoard(board, row, column);
-  bool win = false;
+  int win = 0;
   int move = 0;
   char turn = ' ';
-  bool tie;
+  bool tie = false;
   while (1) {
     printf("Player 1, please enter the column you want to use : ");
     scanf(" %d", &move);
@@ -31,7 +31,7 @@ void twoPlayers(char **board, int row, int column) {
     win = checkWin(board, move, turn, row, column);
     printf("\n\n");
     printBoard(board, row, column);
-    if (win) break;
+    if (win == 4) break;
     tie = boardFilled(board, row, column);
     if (tie) {
       break;
@@ -56,7 +56,7 @@ void twoPlayers(char **board, int row, int column) {
     printf("\n\n");
     printBoard(board, row, column);
     win = checkWin(board, move, turn, row, column);
-    if (win == 1) break;
+    if (win == 4) break;
     tie = boardFilled(board, row, column);
     if (tie) {
       break;

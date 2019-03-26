@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "mis.c"
 #include "twoplayers.c"
-//#include "oneplayer.c"
+#include "oneplayer.c"
 
 
 
@@ -46,7 +46,7 @@ int main() {
 
     switch (point) {
       case 1:
-        //onePlayer(board, row, column);
+        onePlayer(board, row, column);
         break;
       case 2:
         twoPlayers(board, row, column);
