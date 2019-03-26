@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
 
 void twoPlayers(char **board, int row, int column) {
@@ -10,7 +9,7 @@ void twoPlayers(char **board, int row, int column) {
   int win = 0;
   int move = 0;
   char turn = ' ';
-  bool tie = false;
+  int tie = 0;
   while (1) {
     printf("Player 1, please enter the column you want to use : ");
     scanf(" %d", &move);
@@ -33,7 +32,7 @@ void twoPlayers(char **board, int row, int column) {
     printBoard(board, row, column);
     if (win == 4) break;
     tie = boardFilled(board, row, column);
-    if (tie) {
+    if (tie ==1) {
       break;
     }
 
@@ -58,7 +57,7 @@ void twoPlayers(char **board, int row, int column) {
     win = checkWin(board, move, turn, row, column);
     if (win == 4) break;
     tie = boardFilled(board, row, column);
-    if (tie) {
+    if (tie == 1) {
       break;
     }
   }

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
 void destroyArray(int *store, int column) {
   for (int i = 0; i < column; i++)
@@ -135,7 +134,7 @@ int Backslash (char **board, int move, char turn, int row, int column) {
         move++;
         check--;
     }
-    while ( (check < row) && (move > 0) && (board[check][move] == turn) ) {
+    while ( (check < row) && (move >= 0) && (board[check][move] == turn) ) {
         four++;
         if (four == 4) {
             break;
@@ -143,6 +142,7 @@ int Backslash (char **board, int move, char turn, int row, int column) {
         check++;
         move--;
     }
+    printf("%d\n", four);
     return four;
 }
 
@@ -188,14 +188,14 @@ int checkWin(char **board, int move, char turn, int row, int column) {
   return win;
 }
 
-bool boardFilled(char** board, int row, int column) {
-  bool all = false;
+int boardFilled(char** board, int row, int column) {
+  int all;
   for (int i = 0; i < column; i++){
     if(board[0][i] == ' ') {
-      all = false;
+      all = 0;
       break;
     }
-    all = true;
+    all = 1;
   }
 
   return all;
@@ -217,8 +217,9 @@ void removeStone(char** board, int column) {
 int checkScore(char** board, int row, int column, int moverow, int movecol, char shape) {
   int score = 0;
   int temp = 0;
-  score = Vertical(board, movecol, shape, row, column);
-  temp = Horizontal(board, movecol, shape, row, column);
+  temp = Vertical(board, movecol, shape, row, column);
+  score = Horizontal(board, movecol, shape, row, column);
+  printf("%d\n", score);
   if (temp > score) score = temp;
   temp = Backslash(board, movecol, shape, row, column);
   if (temp > score) score = temp;
@@ -237,7 +238,7 @@ int scoreMove(char** board, int row, int column, int movecol, char shape) {
     moverow++;
   }
   temp = checkScore(board, row, column, moverow, movecol, shape);
-  if (temp == 4) score = 20;
+  if (temp == 4) score = 25;
   if (temp == 3) score = 10;
   if (temp == 2) score = 5;
   if (temp == 1) score = 1;
@@ -267,6 +268,9 @@ int computerMove(char** board, int row, int column) {
       ratingO[i] = (ratingO[i] + minArray(ratingX, column) );
       destroyArray(ratingX, column);
       removeStone(board, i);
+    }
+    else {
+      ratingO[i] = -30;
     }
   }
 
