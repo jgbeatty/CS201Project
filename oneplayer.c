@@ -5,7 +5,7 @@
 
 // int computerMove(char**, int, int);
 
-void onePlayer(char** board, int row, int column) {
+void onePlayer(char** board, int row, int column, int *numwins1, int *numwins2) {
   printf("welcome to one player\n");
   printBoard(board, row, column);
   int win = 0;
@@ -50,9 +50,11 @@ void onePlayer(char** board, int row, int column) {
   }
   else if (turn == 'X') {
     printf("Congratulations player one, YOU WIN!\n");
+    *numwins1 = *numwins1 + 1;
   }
   else {
     printf("THE COMPUTER WON!\n");
+    *numwins2 = *numwins2 + 1;
   }
 
 }

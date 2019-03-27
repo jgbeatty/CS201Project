@@ -7,20 +7,19 @@
 
 
 
-void onePlayer(char **, int, int);
-void twoPlayers(char **, int , int);
+void onePlayer(char **, int, int, int *, int*);
+void twoPlayers(char **, int , int, int *, int*);
 char **allocateMem(char **, int, int);
 char **zeroOut(char **,int, int);
 
 
 int main() {
-  int numwins1 = 0;
-  int numwins2 = 0;
   int row;
   int column;
   char again[10] = "yes";
   char answer[10];
   char change[10] = "yes";
+  int point;
   printf("Enter: two - for two players, or one - for single player against the computer: " );
   scanf("%s", answer);
 
@@ -28,12 +27,13 @@ int main() {
     printf("Error! please enter \"one\" or \"two\" : ");
     scanf(" %s", answer);
   }
-  int point;
   if (strcasecmp(answer, "one") == 0)
     point = 1;
   else
     point = 2;
 
+  int numwins1 = 0;
+  int numwins2 = 0;
   while ( strcasecmp(again, "yes") == 0 ) {
     char **board;
     if(strcasecmp(change, "yes") == 0) {
@@ -48,10 +48,10 @@ int main() {
 
     switch (point) {
       case 1:
-        onePlayer(board, row, column);
+        onePlayer(board, row, column, &numwins1, &numwins2);
         break;
       case 2:
-        twoPlayers(board, row, column);
+        twoPlayers(board, row, column, &numwins1, &numwins2);
         break;
     }
 
@@ -62,6 +62,12 @@ int main() {
       printf("Would you like to change the board size?\t:");
       scanf(" %s", change);
     }
+  }
+  if (point == 1) {
+    printf("You won %d matches -- The computer won %d matches\n", numwins1, numwins2);
+  }
+  if (point == 2) {
+    printf("Player 1 won %d matches -- Player 2 won %d matches\n", numwins1, numwins2);
   }
 
   printf("Thank you for playing!\n");

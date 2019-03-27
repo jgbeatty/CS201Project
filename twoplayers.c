@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 
-void twoPlayers(char **board, int row, int column) {
+void twoPlayers(char **board, int row, int column, int* numwins1, int *numwins2) {
   printf("Welcome to two player\n");
   printBoard(board, row, column);
   int win = 0;
@@ -66,9 +66,11 @@ void twoPlayers(char **board, int row, int column) {
   }
   else if (turn == 'X') {
     printf("Congratulations player one, YOU WIN!\n");
+    *numwins1 = *numwins1 + 1;
   }
   else {
     printf("Congratulations player two, YOU WIN!\n");
+    *numwins2 = *numwins2 + 1;
   }
 
 }
