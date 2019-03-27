@@ -3,10 +3,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef struct Pan {
-  int x;
-  int score;
-} pan;
 
 void destroyArray(int *store, int column) {
   for (int i = 0; i < column; i++)
@@ -30,23 +26,20 @@ int maxArray(int* store, int *backUp, int column, int *trouble) {
   int max = store[x];
   int count = 0;
   for (int i = 0; i < column; i++) {
-    printf("%d -------------- %d --------------------\n", max, store[i]);
+    if (store[i] > max ) {
+      max = store[i];
+      x = i;
+      *trouble = 0;
+      count = 0;
+    }
     if (store[i] == max) {
       count++;
       if (count >= 2) {
         *trouble = 1;
-        printf("SWITCH -----------------------\n");
       }
-    }
-    else if (store[i] > max ) {
-      printf("OFF---------------------------------\n");
-     max = store[i];
-     x = i;
-     *trouble = 0;
     }
 
   }
-  printf("%d ----------------------\n", *trouble);
   return x;
 }
 
@@ -290,7 +283,6 @@ int computerMove(char** board, int row, int column) {
     if ( (fillCol(board, i) == 0) ) {
       placeMark(i, 'O', board, row, column);
       ratingO[i] = scoreMove(board, row, column, i, 'O');
-      printf("%d -----------------------------\n", ratingO[i]);
       for (int j = 0; j < column; j++) {
         if( (fillCol(board, j) == 0) ) {
           placeMark(j, 'X', board, row, column);
@@ -300,10 +292,6 @@ int computerMove(char** board, int row, int column) {
       }
       ratingO[i] = (ratingO[i] + minArray(ratingX, column) );
       captain[i] = placeMent(ratingX, column);
-      for (int i = 0; i < column; i++) {
-        printf("%d  ", ratingX[i]);
-      }
-      printf("\n");
       destroyArray(ratingX, column);
       removeStone(board, i);
     }
@@ -311,19 +299,8 @@ int computerMove(char** board, int row, int column) {
       ratingO[i] = -30;
     }
   }
-  printf("\n");
-  for (int i = 0; i < column; i++) {
-    printf("%d  ", captain[i]);
-  }
-  printf("\n");
-  for (int i = 0; i < column; i++) {
-    printf("%d  ", ratingO[i]);
-  }
-  printf("\n");
   decision = maxArray(ratingO, captain, column, &trouble);
-  printf("%d -----------\n", trouble);
   if (trouble == 1) {
-    printf("%d ------------------------------\n", captain[decision]);
     return (captain[decision]);
   }
   else
