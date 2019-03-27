@@ -1,21 +1,52 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
+
+typedef struct Pan {
+  int x;
+  int score;
+} pan;
 
 void destroyArray(int *store, int column) {
   for (int i = 0; i < column; i++)
     store[i] = 0;
 }
 
-int maxArray(int* store, int column) {
+int placeMent(int *store, int column) {
   int x = (column / 2);
-  int max = store[x];
+  int min = store[x];
   for (int i = 0; i < column; i++) {
-    if (store[i] > max ) {
-     max = store[i];
-     x = i;
+    if (store[i] < min) {
+      min = store[i];
+      x = i;
     }
   }
+  return x;
+}
+
+int maxArray(int* store, int *backUp, int column, int *trouble) {
+  int x = (column / 2);
+  int max = store[x];
+  int count = 0;
+  for (int i = 0; i < column; i++) {
+    printf("%d -------------- %d --------------------\n", max, store[i]);
+    if (store[i] == max) {
+      count++;
+      if (count >= 2) {
+        *trouble = 1;
+        printf("SWITCH -----------------------\n");
+      }
+    }
+    else if (store[i] > max ) {
+      printf("OFF---------------------------------\n");
+     max = store[i];
+     x = i;
+     *trouble = 0;
+    }
+
+  }
+  printf("%d ----------------------\n", *trouble);
   return x;
 }
 
@@ -102,9 +133,9 @@ int Horizontal(char **board, int move, char turn, int row, int column) {
         while(board[check][move] != ' ') {
             check--;
         }
+        check++;
     }
-    if (check != 0)
-        check ++;
+
     while ( ( (move-1) >= 0) && (board[check][move-1] == turn) ) {
         move--;
     }
@@ -142,7 +173,6 @@ int Backslash (char **board, int move, char turn, int row, int column) {
         check++;
         move--;
     }
-    printf("%d\n", four);
     return four;
 }
 
@@ -219,7 +249,6 @@ int checkScore(char** board, int row, int column, int moverow, int movecol, char
   int temp = 0;
   temp = Vertical(board, movecol, shape, row, column);
   score = Horizontal(board, movecol, shape, row, column);
-  printf("%d\n", score);
   if (temp > score) score = temp;
   temp = Backslash(board, movecol, shape, row, column);
   if (temp > score) score = temp;
@@ -238,13 +267,13 @@ int scoreMove(char** board, int row, int column, int movecol, char shape) {
     moverow++;
   }
   temp = checkScore(board, row, column, moverow, movecol, shape);
-  if (temp == 4) score = 25;
-  if (temp == 3) score = 10;
+  if (temp == 4) score = 21;
+  if (temp == 3) score = 12;
   if (temp == 2) score = 5;
   if (temp == 1) score = 1;
 
   if (shape == 'O')
-    return score;
+    return (score);
   else
     return (-score);
 }
@@ -252,12 +281,16 @@ int scoreMove(char** board, int row, int column, int movecol, char shape) {
 int computerMove(char** board, int row, int column) {
   int ratingO[column];
   int ratingX[column];
+  int captain[column];
+  int trouble;
+  int decision;
   destroyArray(ratingO, column);
   destroyArray(ratingX, column);
   for (int i = 0; i < column; i++){
     if ( (fillCol(board, i) == 0) ) {
       placeMark(i, 'O', board, row, column);
       ratingO[i] = scoreMove(board, row, column, i, 'O');
+      printf("%d -----------------------------\n", ratingO[i]);
       for (int j = 0; j < column; j++) {
         if( (fillCol(board, j) == 0) ) {
           placeMark(j, 'X', board, row, column);
@@ -266,6 +299,11 @@ int computerMove(char** board, int row, int column) {
         }
       }
       ratingO[i] = (ratingO[i] + minArray(ratingX, column) );
+      captain[i] = placeMent(ratingX, column);
+      for (int i = 0; i < column; i++) {
+        printf("%d  ", ratingX[i]);
+      }
+      printf("\n");
       destroyArray(ratingX, column);
       removeStone(board, i);
     }
@@ -273,6 +311,21 @@ int computerMove(char** board, int row, int column) {
       ratingO[i] = -30;
     }
   }
-
-  return (maxArray(ratingO, column));
+  printf("\n");
+  for (int i = 0; i < column; i++) {
+    printf("%d  ", captain[i]);
+  }
+  printf("\n");
+  for (int i = 0; i < column; i++) {
+    printf("%d  ", ratingO[i]);
+  }
+  printf("\n");
+  decision = maxArray(ratingO, captain, column, &trouble);
+  printf("%d -----------\n", trouble);
+  if (trouble == 1) {
+    printf("%d ------------------------------\n", captain[decision]);
+    return (captain[decision]);
+  }
+  else
+    return decision;
 }

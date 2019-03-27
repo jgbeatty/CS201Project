@@ -14,6 +14,8 @@ char **zeroOut(char **,int, int);
 
 
 int main() {
+  int numwins1 = 0;
+  int numwins2 = 0;
   int row;
   int column;
   char again[10] = "yes";

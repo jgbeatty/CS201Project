@@ -27,9 +27,9 @@ void twoPlayers(char **board, int row, int column) {
     move--;
     turn = 'X';
     placeMark(move, turn, board, row, column);
-    win = checkWin(board, move, turn, row, column);
     printf("\n\n");
     printBoard(board, row, column);
+    win = checkWin(board, move, turn, row, column);
     if (win == 4) break;
     tie = boardFilled(board, row, column);
     if (tie ==1) {
