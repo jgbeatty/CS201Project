@@ -68,18 +68,21 @@ void onePlayer(char** board, int row, int column, int *numwins1, int *numwins2) 
     if (tie == 1) break;
   }
   if (tie == 1) { //tie broke the game
+    printf("\n\n");
     system("clear");
     printBoard(board, row, column);
     printf("\nIt is a tie. YOU BOTH LOSE\n");
 
   }
   else if (turn == 'X') { //player one won the game
+    printf("\n\n");
     system("clear");
     printBoard(board, row, column);
     printf("\nCongratulations player one, YOU WIN!\n");
     *numwins1 = *numwins1 + 1;
   }
   else { //computer won the game
+    printf("\n\n");
     system("clear");
     printBoard(board, row, column);
     printf("\nTHE COMPUTER WON!\n");
