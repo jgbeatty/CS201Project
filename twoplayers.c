@@ -4,23 +4,36 @@
 
 
 void twoPlayers(char **board, int row, int column, int* numwins1, int *numwins2) {
+  system("clear");
   printf("Welcome to two player\n");
   printBoard(board, row, column);
   int win = 0;
   int move = 0;
   char turn = ' ';
+  char temp[10];
   int tie = 0;
   while (1) {
     printf("Player 1, please enter the column you want to use : ");
-    scanf(" %d", &move);
-    while ( (move < 1 ) || (move > column) ){
-      printf("ERROR: Invalid number. Please enter number from 1 to %d : ", column);
-      scanf(" %d", &move);
-      printf("\n");
+    scanf(" %10s", temp);
+    while ((!number(temp))) {
+      printf("ERROR: enter a valid number from 1 to %d  :", column);
+      scanf("%10s", temp);
     }
-    while (board[0][(move-1)] != ' ' ) {
-      printf("ERROR: column is filled, please pick a different one : ");
-      scanf(" %d", &move);
+    move = atoi(temp);
+    while ( (move < 1 ) || (move > column) || (board[0][(move-1)] != ' ') ){
+      if ((move < 1 ) || (move > column)) {
+        printf("ERROR: Invalid number. Please enter number from 1 to %d  : ", column);
+      }
+      else {
+        printf("ERROR: column is filled, please pick a different one : ");
+      }
+      scanf(" %10s", temp);
+
+      while ((!number(temp))) {
+        printf("ERROR: enter a valid number from 1 to %d  :", column);
+        scanf("%10s", temp);
+      }
+      move = atoi(temp);
       printf("\n");
     }
 
@@ -28,6 +41,7 @@ void twoPlayers(char **board, int row, int column, int* numwins1, int *numwins2)
     turn = 'X';
     placeMark(move, turn, board, row, column);
     printf("\n\n");
+    system("clear");
     printBoard(board, row, column);
     win = checkWin(board, move, turn, row, column);
     if (win == 4) break;
@@ -38,21 +52,33 @@ void twoPlayers(char **board, int row, int column, int* numwins1, int *numwins2)
 
     if (boardFilled(board, row, column) ) break;
     printf("Player 2, please enter the column you want to use : ");
-    scanf(" %d", &move);
-    while ( (move < 1) || (move > column) ){
-      printf("ERROR: Invalid number. Please enter number from 1 to %d : ", column);
-      scanf(" %d", &move);
-      printf("\n");
+    scanf(" %10s", temp);
+    while ((!number(temp))) {
+      printf("ERROR: enter a valid number from 1 to %d  :", column);
+      scanf("%10s", temp);
     }
-    while (board[0][(move - 1)] != ' ' ) {
-      printf("ERROR: column is filled, please pick a different one : ");
-      scanf(" %d", &move);
+    move = atoi(temp);
+    while ( (move < 1 ) || (move > column) || (board[0][(move-1)] != ' ') ){
+      if ((move < 1 ) || (move > column)) {
+        printf("ERROR: Invalid number. Please enter number from 1 to %d  : ", column);
+      }
+      else {
+        printf("ERROR: column is filled, please pick a different one : ");
+      }
+      scanf(" %10s", temp);
+
+      while ((!number(temp))) {
+        printf("ERROR: enter a valid number from 1 to %d  :", column);
+        scanf("%10s", temp);
+      }
+      move = atoi(temp);
       printf("\n");
     }
     move--;
     turn = 'O';
     placeMark(move, turn, board, row, column);
     printf("\n\n");
+    system("clear");
     printBoard(board, row, column);
     win = checkWin(board, move, turn, row, column);
     if (win == 4) break;
