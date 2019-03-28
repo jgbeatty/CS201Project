@@ -15,6 +15,28 @@ bool number(char test[]) {
     }
     state = true;
   }
+
+  return state;
+}
+
+// This function makes sure the input is a number greater than 3
+bool originInput(char test[]) {
+  int safe;
+  int x = strlen(test);
+  bool state;
+  for (int i = 0; i < x; i++) {
+    if (!isdigit(test[i])) {
+      state = false;
+      break;
+    }
+    state = true;
+  }
+  if (state) {
+    safe = atoi(test);
+    if (safe < 4) {
+      state = false;
+    }
+  }
   return state;
 }
 
@@ -125,9 +147,8 @@ int Vertical(char **board, int move, char turn, int row, int column) {
         while(board[check][move] != ' ') {
             check--;
         }
+        check++;
     }
-    if (check != 0)
-        check ++;
     while ( (check <= (row - 1)) && (move <=(column - 1)) && (move >= 0) && (board[check][move] == turn)  ) {
         four++;
         if (four == 4) {

@@ -25,19 +25,20 @@ int main() {
   int row;
   int column;
   char temp[10] = "no";
-  char again[10] = "yes";
-  char answer[10];
-  char change[10] = "yes";
+  char again[200] = "yes";
+  char answer[200];
+  char change[200] = "yes";
   int point;
   char **board;
+  // finds what mode is wanted to play
   printf("Enter: two - for two players, or one - for single player against the computer: " );
-  scanf("%s", answer);
+  scanf("%200s", answer);
 
+  //Adresses errors for input
   while ( (strncasecmp(answer, "two", 3) != 0) && (strncasecmp(answer, "one", 3) != 0) ) {
     printf("Error! please enter \"one\" or \"two\" : ");
-    scanf(" %10s", answer);
+    scanf(" %200s", answer);
   }
-  printf("%10s\n", answer);
   if (strncasecmp(answer, "one", 3) == 0)
     point = 1;
   else
@@ -48,14 +49,16 @@ int main() {
   while ( strncasecmp(again, "yes", 3) == 0 ) {
     if(strncasecmp(change, "yes", 3) == 0) {
       strncpy(temp, "no", 2);
-      while (!number(temp)) {
-        printf("\nHow many rows do you want? Please enter a number greater than 4  \t: ");
+      // finds how many rows are wanted
+      while (!originInput(temp)) {
+        printf("\nHow many rows do you want? Please enter a number greater than 3 \t: ");
         scanf("%10s", temp);
       }
       row = atoi(temp);
       strncpy(temp, "no", 2);
-      while (!number(temp)) {
-      printf("How many columns do you want? Please enter a number greater than 4\t: ");
+      // Finds how many columns are wanted
+      while (!originInput(temp)) {
+      printf("How many columns do you want? Please enter a number greater than 3\t: ");
         scanf("%10s", temp);
       }
       column = atoi(temp);
@@ -66,21 +69,23 @@ int main() {
 
     switch (point) {
       case 1:
+        // jumps to one player mode
         onePlayer(board, row, column, &numwins1, &numwins2);
         break;
       case 2:
+        // jumps to two player mode
         twoPlayers(board, row, column, &numwins1, &numwins2);
         break;
     }
 
 
     printf("Do you want to play again? (yes)/(no) : ");
-    scanf(" %s", again);
+    scanf(" %200s", again);
     if (strcasecmp(again, "yes") == 0 ){
       printf("Would you like to change the board size?\t:");
-      scanf(" %3s", change);
+      scanf(" %200s", change);
     }
-    if (strcasecmp(change, "yes") == 0) {
+    if (strncasecmp(change, "yes", 3) == 0) {
       goodByeArray(board, row, column);
     }
   }
@@ -92,7 +97,7 @@ int main() {
   }
 
   goodByeArray(board, row, column);
-  printf("Thank you for playing!\n");
+  printf("Thank you for playing!\n\n");
   return 0;
 }
 
