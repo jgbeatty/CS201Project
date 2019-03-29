@@ -15,6 +15,7 @@ In my portfolio project I choose to make a connect 4 game that can be played wit
 * The goal of the game is two place four of the players pieces in a row wether it be vertical, horizontal, or diagonal <br />
 * This game was coded on Atom and tested on Ubuntu <br />
 * The game was coded for a class project for the University of Alabama <br />
+* To play this game type the command "make", and the exicutable isi "./main"
 
 ## Feature
 * This game uses ASCII character based interface
