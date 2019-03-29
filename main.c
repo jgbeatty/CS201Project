@@ -18,7 +18,7 @@ void onePlayer(char **, int, int, int *, int*);
 void twoPlayers(char **, int , int, int *, int*);
 char **allocateMem(char **, int, int);
 char **zeroOut(char **,int, int);
-char **goodByeArray(char **, int , int);
+void goodByeArray(char **, int , int);
 
 
 int main() {
@@ -81,6 +81,7 @@ int main() {
 
     printf("Do you want to play again? (yes)/(no) : ");
     scanf(" %200s", again);
+    strncpy(change, "no", 3);
     if (strcasecmp(again, "yes") == 0 ){
       printf("Would you like to change the board size?\t:");
       scanf(" %200s", change);
@@ -119,12 +120,12 @@ char **zeroOut(char ** array, int row, int column) {
 }
 
 // this function deallocates memory to the array.
-char **goodByeArray(char **array, int row, int column) {
+void goodByeArray(char **array, int row, int column) {
   for (int i = 0; i < row; i++) {
     free(array[i]);
   }
   free(array);
-  return array;
+  return;
 }
 
 // Row x Column
