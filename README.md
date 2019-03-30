@@ -8,7 +8,7 @@ In my portfolio project I choose to make a connect 4 game that can be played wit
 &nbsp;&nbsp; -https://theoryofprogramming.com/2017/12/12/minimax-algorithm/ <br />
   
 ## Video Tutorial
--link to be posted
+-https://youtu.be/C2Gr4KQMqEA
 
 ## Notes About the Game
 * Connect 4 is a game played between two people with pieces 'X' for player 1 and 'O' for player 2 <br />
