@@ -5,8 +5,10 @@ In my portfolio project I choose to make a connect 4 game that can be played wit
 ### Sources
 -Solving Connect 4: Part 3- MinMax algorithm <br />
 &nbsp;&nbsp; -http://blog.gamesolver.org/solving-connect-four/03-minmax/ <br />
+&nbsp;&nbsp; -I used this sight to learn about the negamax varient of scoring. This is where the only difference in scoring the computers move vs the opponents move is that the opponents score is negative
 -MiniMax Algorithm <br />
 &nbsp;&nbsp; -https://theoryofprogramming.com/2017/12/12/minimax-algorithm/ <br />
+&nbsp;&nbsp; - I used this to apply the minimax to my board. I used the double for loop to place the computer's piece and then the opponents pliece and score's both. It adds the lowest of the opponents score to the computer's score. Then takes the max of the computer's score and places it's piece there.
   
 ## Video Tutorial
 -https://youtu.be/C2Gr4KQMqEA
@@ -16,7 +18,7 @@ In my portfolio project I choose to make a connect 4 game that can be played wit
 * The goal of the game is two place four of the players pieces in a row wether it be vertical, horizontal, or diagonal <br />
 * This game was coded on Atom and tested on Ubuntu <br />
 * The game was coded for a class project for the University of Alabama <br />
-* To play this game type the command "make", and the exicutable isi "./main"
+* To play this game type the command "make", and the exicutable is "./main"
 
 ## Feature
 * This game uses ASCII character based interface

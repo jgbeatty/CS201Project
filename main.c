@@ -51,7 +51,7 @@ int main() {
       strncpy(temp, "no", 2);
       // finds how many rows are wanted
       while (!originInput(temp)) {
-        printf("\n *Note that if the number of rows is greater than 25, and the number of columns is greater than 49, the board will be too big to fit on the screen*\n");
+        printf("\n *Note that if the number of rows is greater than 25 or the number of columns is greater than 49, the board will be too big to fit on the screen*\n");
         printf("How many rows do you want? Please enter a number greater than 3 \t: ");
         scanf("%50s", temp);
       }

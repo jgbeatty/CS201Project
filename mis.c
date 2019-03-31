@@ -304,6 +304,7 @@ int checkScore(char** board, int row, int column, int movecol, char shape) {
 
 // This function returns the score for the placement based on the number of consecutive stones next to the stones
 int scoreMove(char** board, int row, int column, int movecol, char shape) {
+  // "http://blog.gamesolver.org/solving-connect-four/03-minmax/" helped understand the Negamax variant that I used to score
   int score = 0;
   int temp = 0;
   temp = checkScore(board, row, column, movecol, shape);
@@ -336,6 +337,7 @@ int computerMove(char** board, int row, int column) {
   destroyArray(ratingO, column);
   destroyArray(ratingX, column);
   // this is my next best move algorithm. It scores both the computer's move and then the next one
+  // "https://theoryofprogramming.com/2017/12/12/minimax-algorithm/" helped understand the MiniMax algorithm
   for (int i = 0; i < column; i++){
     if ( (fillCol(board, i) == 0) ) {
       placeMark(i, 'O', board, row, column);
