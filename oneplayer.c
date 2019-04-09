@@ -76,7 +76,7 @@ void onePlayer(char** board, int row, int column, int *numwins1, int *numwins2) 
   }
   else if (turn == 'X') { //player one won the game
     system("clear");
-    printf("\n\n);
+    printf("\n\n");
     printBoard(board, row, column);
     printf("\nCongratulations player one, YOU WIN!\n");
     *numwins1 = *numwins1 + 1;
