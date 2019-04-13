@@ -1,4 +1,4 @@
-# CS201 Portfolio Project
+# CS201 Portfolio Project by Jackson Beatty
 In my portfolio project I choose to make a connect 4 game that can be played with two people, or one player can play against the AI that was coded. This will be submitted by March 31, 2019 at the University of Alabama. This is for our CS201, our Data Structures and Algorithms class.
 
 
